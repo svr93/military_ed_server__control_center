@@ -6,3 +6,4 @@ build/
 /applications/main/static/img/
 /applications/main/static/js/main.js
 /applications/main/static/main.html
+/applications/main/app/html.template
