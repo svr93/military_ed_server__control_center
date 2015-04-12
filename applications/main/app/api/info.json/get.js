@@ -7,10 +7,12 @@ module.exports = function(client, callback) {
   var STATION_LATITUDE = 60;
   var STATION_LONGITUDE = 70;
 
-  var query = '?latitude=' + STATION_LATITUDE +
-              '&longitude=' + STATION_LONGITUDE;
+  /* var query = '?latitude=' + STATION_LATITUDE +
+              '&longitude=' + STATION_LONGITUDE; */
 
-  http.get('http://192.168.0.127/info' + query, function(res) {
+  // GET data from information_tools_server
+
+  http.get('http://192.168.0.126/info', function(res) {
     var chunks = [];
 
     res.on('data', function(chunk) {
