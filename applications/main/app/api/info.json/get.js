@@ -22,19 +22,34 @@ module.exports = function(client, callback) {
     res.on('end', function() {
       var buffer = Buffer.concat(chunks);
 
-      process(buffer);
+      if (res.headers['content-encoding'] == "gzip") {
+        processGzip(buffer);
+      } else {
+        process(buffer);
+      }
+
     });
 
   }).on('error', function(e) {
 
     client.context.data = {
-      error: e.message
+      error: e.message,
+      explanation: ""
     };
+
+    if (e.message == "connect ETIMEDOUT" ||
+        e.message == "connect EHOSTUNREACH" ||
+        e.message == "connect ECONNREFUSED") {
+
+      client.context.data.explanation =
+      "Information tools server is not responding";
+    }
+
     callback();
 
   });
 
-  function process(buffer) {
+  function processGzip(buffer) {
     zlib.gunzip(buffer, function(err, decoded) {
 
       var coords = JSON.parse(decoded.toString());
@@ -44,4 +59,12 @@ module.exports = function(client, callback) {
 
     });
   }
+
+  function process(buffer) {    
+    var coords = JSON.parse(buffer.toString());
+    // need processing
+    client.context.data = coords;
+    callback();
+  }
+
 };
