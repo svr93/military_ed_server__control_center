@@ -12,7 +12,7 @@ module.exports = function(client, callback) {
 
   // GET data from information_tools_server
 
-  http.get('http://192.168.0.126/info', function(res) {
+  http.get('http://192.168.199.3/info', function(res) {
     var chunks = [];
 
     res.on('data', function(chunk) {
