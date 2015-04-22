@@ -8,3 +8,4 @@ build/
 /applications/main/static/js/w_sender.js
 /applications/main/static/main.html
 /applications/main/app/html.template
+/applications/main/app/instruction.template
