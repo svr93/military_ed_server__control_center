@@ -9,6 +9,7 @@ git remote add origin https://github.com/svr93/military_ed_client_prod
 git pull origin master
 
 cp -f main.html ../app/html.template
+cp -f instruction.template ../app/instruction.template
 
 cd ../../../
 
